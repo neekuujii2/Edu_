@@ -76,10 +76,26 @@ export const partnerUniversities = [
   }
 ];
 
-export const courseStreams = [
+// ✅ Types define karo
+type Mode = "distance" | "regular";
+
+type Course = {
+  name: string;
+  modes: Mode[];
+};
+
+type Stream = {
+  title: string;
+  description: string;
+  courses: Course[];
+};
+
+// ✅ Proper typed data
+export const courseStreams: Stream[] = [
   {
     title: "Management",
-    description: "Job-ready business programs with flexible formats for freshers and working professionals.",
+    description:
+      "Job-ready business programs with flexible formats for freshers and working professionals.",
     courses: [
       { name: "MBA (All Streams)", modes: ["distance", "regular"] },
       { name: "BBA", modes: ["regular"] }
@@ -87,7 +103,8 @@ export const courseStreams = [
   },
   {
     title: "Engineering",
-    description: "Technical programs with guided admissions into leading approved institutions.",
+    description:
+      "Technical programs with guided admissions into leading approved institutions.",
     courses: [
       { name: "B.Tech", modes: ["regular"] },
       { name: "M.Tech", modes: ["regular"] }
@@ -95,7 +112,8 @@ export const courseStreams = [
   },
   {
     title: "Law",
-    description: "Undergraduate and postgraduate law pathways with complete counseling support.",
+    description:
+      "Undergraduate and postgraduate law pathways with complete counseling support.",
     courses: [
       { name: "BA LLB", modes: ["regular"] },
       { name: "LLB", modes: ["regular"] },
@@ -104,7 +122,8 @@ export const courseStreams = [
   },
   {
     title: "Pharmacy",
-    description: "Recognized pharmacy options designed around eligibility, approvals, and career goals.",
+    description:
+      "Recognized pharmacy options designed around eligibility, approvals, and career goals.",
     courses: [
       { name: "D Pharma", modes: ["regular"] },
       { name: "B Pharmacy", modes: ["regular"] }
@@ -112,7 +131,8 @@ export const courseStreams = [
   },
   {
     title: "Education",
-    description: "Teacher training and academic progression programs with documentation support.",
+    description:
+      "Teacher training and academic progression programs with documentation support.",
     courses: [
       { name: "B.Ed", modes: ["regular"] },
       { name: "M.Ed", modes: ["distance", "regular"] }
@@ -120,6 +140,7 @@ export const courseStreams = [
   }
 ];
 
+// ✅ No change needed here
 export const featuredCourses = [
   "MBA",
   "B.Tech",
@@ -131,7 +152,6 @@ export const featuredCourses = [
   "B.Ed",
   "M.Ed"
 ];
-
 export const trustMetrics = [
   {
     value: "15+",

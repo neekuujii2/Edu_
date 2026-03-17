@@ -197,7 +197,8 @@ export async function approveTestimonialAction(formData: FormData) {
   }
 
   if (error) {
-    return { success: false, message: error.message };
+    console.error(error.message);
+    return;
   }
 
   const approvedState = data.status ?? (data.approved ? "approved" : "pending");
@@ -214,7 +215,7 @@ export async function approveTestimonialAction(formData: FormData) {
   revalidatePath("/");
   revalidatePath("/admin");
 
-  return { success: true, message: "Testimonial approved." };
+  
 }
 
 export async function signOutAction() {
