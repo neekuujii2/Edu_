@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/page-hero";
-import { CourseGrid } from "@/components/course-grid";
+import { CoursesBrowser } from "@/components/courses-browser";
 import { courseStreams } from "@/lib/site";
 import { getCurrentUser } from "@/lib/data";
 
@@ -17,13 +17,11 @@ export default async function CoursesPage() {
       <PageHero
         eyebrow="Programs"
         title="Explore high-demand courses across leading academic streams"
-        description="Choose from career-focused undergraduate and postgraduate programs with guided admissions."
+        description="Choose from career-focused undergraduate and postgraduate programs with guided admissions across distance learning and regular education."
       />
       <section className="section-padding">
-        <div className="container space-y-12">
-          {courseStreams.map((stream) => (
-            <CourseGrid key={stream.title} stream={stream} user={user} />
-          ))}
+        <div className="container">
+          <CoursesBrowser streams={courseStreams} user={user} />
         </div>
       </section>
     </>

@@ -8,5 +8,7 @@ export const inquirySchema = z.object({
 
 export const testimonialSchema = z.object({
   name: z.string().min(2, "Name is required"),
+  course: z.string().min(2, "Course is required"),
+  rating: z.coerce.number().int().min(1, "Rating is required").max(5, "Rating must be between 1 and 5"),
   message: z.string().min(20, "Please share a little more feedback")
 });

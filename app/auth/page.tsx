@@ -9,12 +9,12 @@ export const metadata: Metadata = {
 export default function AuthPage({
   searchParams
 }: {
-  searchParams: { redirect?: string };
+  searchParams: { redirect?: string; message?: string };
 }) {
   return (
     <div className="section-padding bg-hero-glow">
       <div className="container max-w-2xl">
-        <AuthCard redirectTo={searchParams.redirect ?? "/"} />
+        <AuthCard redirectTo={searchParams.redirect ?? "/"} initialMessage={searchParams.message} />
       </div>
     </div>
   );

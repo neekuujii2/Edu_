@@ -30,22 +30,94 @@ export const socialLinks = {
 };
 
 export const partnerUniversities = [
-  "Amity University",
-  "LPU",
-  "Manipal",
-  "Jain University",
-  "Chandigarh University",
-  "Sharda University",
-  "Bharathidasan",
-  "GLA University"
+  {
+    name: "Amity University",
+    image: "/university/Amity University.png"
+  },
+  {
+    name: "Lovely Professional University",
+    image: "/university/Lovely Professional University.png"
+  },
+  {
+    name: "Manipal Academy",
+    image: "/university/Manipal Academy.png"
+  },
+  {
+    name: "Chandigarh University",
+    image: "/university/Chandigarh University.png"
+  },
+  {
+    name: "Sharda University",
+    image: "/university/Sharda University.png"
+  },
+  {
+    name: "Parul University",
+    image: "/university/Parul university.png"
+  },
+  {
+    name: "Subharti University",
+    image: "/university/Subharti university.png"
+  },
+  {
+    name: "Galgotias Institutions",
+    image: "/university/GALGOTIAS INSTITUTIONS.png"
+  },
+  {
+    name: "Guru Gobind Singh Indraprastha University",
+    image: "/university/Guru Gobind Singh Indraprastha University.png"
+  },
+  {
+    name: "Kurukshetra University",
+    image: "/university/kurukshetra university.png"
+  },
+  {
+    name: "Maharishi Dayanand University",
+    image: "/university/Maharishi dhyand university.png"
+  }
 ];
 
 export const courseStreams = [
-  { title: "Management", courses: ["MBA (All Streams)"] },
-  { title: "Engineering", courses: ["B.Tech", "M.Tech"] },
-  { title: "Law", courses: ["BA LLB", "LLB", "LLM"] },
-  { title: "Pharmacy", courses: ["D Pharma", "B Pharmacy"] },
-  { title: "Education", courses: ["B.Ed", "M.Ed"] }
+  {
+    title: "Management",
+    description: "Job-ready business programs with flexible formats for freshers and working professionals.",
+    courses: [
+      { name: "MBA (All Streams)", modes: ["distance", "regular"] },
+      { name: "BBA", modes: ["regular"] }
+    ]
+  },
+  {
+    title: "Engineering",
+    description: "Technical programs with guided admissions into leading approved institutions.",
+    courses: [
+      { name: "B.Tech", modes: ["regular"] },
+      { name: "M.Tech", modes: ["regular"] }
+    ]
+  },
+  {
+    title: "Law",
+    description: "Undergraduate and postgraduate law pathways with complete counseling support.",
+    courses: [
+      { name: "BA LLB", modes: ["regular"] },
+      { name: "LLB", modes: ["regular"] },
+      { name: "LLM", modes: ["distance", "regular"] }
+    ]
+  },
+  {
+    title: "Pharmacy",
+    description: "Recognized pharmacy options designed around eligibility, approvals, and career goals.",
+    courses: [
+      { name: "D Pharma", modes: ["regular"] },
+      { name: "B Pharmacy", modes: ["regular"] }
+    ]
+  },
+  {
+    title: "Education",
+    description: "Teacher training and academic progression programs with documentation support.",
+    courses: [
+      { name: "B.Ed", modes: ["regular"] },
+      { name: "M.Ed", modes: ["distance", "regular"] }
+    ]
+  }
 ];
 
 export const featuredCourses = [
@@ -58,4 +130,32 @@ export const featuredCourses = [
   "B Pharmacy",
   "B.Ed",
   "M.Ed"
+];
+
+export const trustMetrics = [
+  {
+    value: "15+",
+    label: "Years Experience",
+    description: "Experienced guidance across admissions, documentation, and career-aligned counseling."
+  },
+  {
+    value: "50+",
+    label: "Partner Universities",
+    description: "A broad network of trusted universities for regular, distance, and professional programs."
+  },
+  {
+    value: "10k+",
+    label: "Students Placed",
+    description: "Students guided into the right academic path with responsive end-to-end support."
+  },
+  {
+    value: "UGC",
+    label: "Recognized Degree",
+    description: "Programs guided with a focus on recognized universities and valid academic outcomes."
+  },
+  {
+    value: "AICTE",
+    label: "Approved Universities",
+    description: "Support for institutions and programs aligned with required approvals where applicable."
+  }
 ];

@@ -1,16 +1,26 @@
 import { formatMonthKey } from "@/lib/utils";
 import { createServerSupabaseClient, createServiceRoleClient } from "@/lib/supabase/server";
 
+function isApprovedTestimonial(testimonial: any) {
+  return testimonial.approved === true || testimonial.status === "approved";
+}
+
+function normalizeTestimonial(testimonial: any) {
+  return {
+    ...testimonial,
+    approved: isApprovedTestimonial(testimonial)
+  };
+}
+
 export async function getApprovedTestimonials() {
   const supabase = createServiceRoleClient();
-  const { data } = await supabase
-    .from("testimonials")
-    .select("*")
-    .eq("approved", true)
-    .order("created_at", { ascending: false })
-    .limit(6);
+  const { data, error } = await supabase.from("testimonials").select("*").order("created_at", { ascending: false }).limit(50);
 
-  return data ?? [];
+  if (error) {
+    return [];
+  }
+
+  return (data ?? []).map(normalizeTestimonial).filter((item) => item.approved).slice(0, 6);
 }
 
 export async function getCurrentUser() {
@@ -30,7 +40,7 @@ export async function getAdminDashboardData() {
   ]);
 
   const leads = leadsResult.data ?? [];
-  const testimonials = testimonialsResult.data ?? [];
+  const testimonials = (testimonialsResult.data ?? []).map(normalizeTestimonial);
   const approvedTestimonials = testimonials.filter((item) => item.approved).length;
   const monthMap = new Map<string, number>();
 

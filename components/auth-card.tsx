@@ -19,8 +19,10 @@ function SubmitButton() {
   );
 }
 
-export function AuthCard({ redirectTo }: { redirectTo: string }) {
+export function AuthCard({ redirectTo, initialMessage }: { redirectTo: string; initialMessage?: string }) {
   const [state, formAction] = useFormState(signInWithOtpAction, initialState);
+  const message = state.message || initialMessage;
+  const isSuccess = state.message ? state.success : false;
 
   return (
     <Card className="p-8 md:p-10">
@@ -39,8 +41,8 @@ export function AuthCard({ redirectTo }: { redirectTo: string }) {
           <Label htmlFor="email">Email</Label>
           <Input id="email" name="email" type="email" placeholder="Enter your email" required />
         </div>
-        {state.message ? (
-          <p className={`text-sm ${state.success ? "text-green-600" : "text-red-600"}`}>{state.message}</p>
+        {message ? (
+          <p className={`text-sm ${isSuccess ? "text-green-600" : "text-red-600"}`}>{message}</p>
         ) : null}
         <SubmitButton />
       </form>

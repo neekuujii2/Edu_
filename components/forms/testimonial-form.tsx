@@ -49,6 +49,14 @@ export function TestimonialForm({ user }: { user: any }) {
           <Input id="testimonial-name" name="name" placeholder="Your name" required />
         </div>
         <div className="space-y-2">
+          <Label htmlFor="testimonial-course">Course</Label>
+          <Input id="testimonial-course" name="course" placeholder="MBA / B.Tech / NIOS / etc." required />
+        </div>
+        <div className="space-y-2">
+          <Label htmlFor="testimonial-rating">Rating</Label>
+          <Input id="testimonial-rating" name="rating" type="number" min="1" max="5" defaultValue="5" required />
+        </div>
+        <div className="space-y-2">
           <Label htmlFor="message">Feedback</Label>
           <Textarea id="message" name="message" placeholder="Tell us about your admission journey..." required />
         </div>

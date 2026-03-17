@@ -16,14 +16,51 @@ create table if not exists public.leads (
   created_at timestamptz not null default now()
 );
 
+alter table if exists public.leads
+add column if not exists course text;
+
+update public.leads
+set course = 'General Inquiry'
+where course is null;
+
+alter table if exists public.leads
+alter column course set not null;
+
 create table if not exists public.testimonials (
   id uuid primary key default gen_random_uuid(),
   user_id uuid references auth.users(id) on delete set null,
   name text not null,
+  course text,
+  rating integer,
   message text not null,
   approved boolean not null default false,
+  status text,
   created_at timestamptz not null default now()
 );
+
+alter table if exists public.testimonials
+add column if not exists course text;
+
+alter table if exists public.testimonials
+add column if not exists rating integer;
+
+alter table if exists public.testimonials
+add column if not exists status text;
+
+update public.testimonials
+set course = coalesce(course, 'General')
+where course is null;
+
+update public.testimonials
+set rating = coalesce(rating, 5)
+where rating is null;
+
+update public.testimonials
+set status = case
+  when approved = true then 'approved'
+  else 'pending'
+end
+where status is null;
 
 alter table public.users enable row level security;
 alter table public.leads enable row level security;
