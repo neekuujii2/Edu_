@@ -1,7 +1,7 @@
 export const siteConfig = {
   name: process.env.NEXT_PUBLIC_SITE_NAME ?? "Aspire Education Consultancy",
   description:
-    "Premium education consultancy for UG, PG, distance learning, and open schooling admissions.",
+    "Delivering expert academic consultancy for UG, PG, distance learning, and open schooling programs with trusted guidance and verified institutions.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
   keywords: [
     "Education consultancy",
@@ -39,7 +39,7 @@ export const partnerUniversities = [
     image: "/university/Lovely Professional University.png"
   },
   {
-    name: "Manipal Academy",
+    name: "Manipal University",
     image: "/university/Manipal Academy.png"
   },
   {
@@ -59,7 +59,7 @@ export const partnerUniversities = [
     image: "/university/Subharti university.png"
   },
   {
-    name: "Galgotias Institutions",
+    name: "Galgotias University",
     image: "/university/GALGOTIAS INSTITUTIONS.png"
   },
   {
@@ -98,7 +98,10 @@ export const courseStreams: Stream[] = [
       "Job-ready business programs with flexible formats for freshers and working professionals.",
     courses: [
       { name: "MBA (All Streams)", modes: ["distance", "regular"] },
-      { name: "BBA", modes: ["regular"] }
+      { name: "BA", modes: ["distance","regular"] },
+      { name: "BBA", modes: ["regular"] },
+      { name: "B.COM", modes: ["distance","regular"] },
+      { name: "BSC", modes: ["distance","regular"] },
     ]
   },
   {
@@ -107,7 +110,9 @@ export const courseStreams: Stream[] = [
       "Technical programs with guided admissions into leading approved institutions.",
     courses: [
       { name: "B.Tech", modes: ["regular"] },
-      { name: "M.Tech", modes: ["regular"] }
+      { name: "M.Tech", modes: ["regular"] },
+      { name: "MCA", modes: ["regular"] },
+      { name: "BCA", modes: ["regular"] },
     ]
   },
   {
@@ -117,7 +122,7 @@ export const courseStreams: Stream[] = [
     courses: [
       { name: "BA LLB", modes: ["regular"] },
       { name: "LLB", modes: ["regular"] },
-      { name: "LLM", modes: ["distance", "regular"] }
+      { name: "LLM", modes: ["regular"] }
     ]
   },
   {
@@ -135,7 +140,7 @@ export const courseStreams: Stream[] = [
       "Teacher training and academic progression programs with documentation support.",
     courses: [
       { name: "B.Ed", modes: ["regular"] },
-      { name: "M.Ed", modes: ["distance", "regular"] }
+      { name: "M.Ed", modes: ["regular"] }
     ]
   }
 ];
@@ -144,6 +149,13 @@ export const courseStreams: Stream[] = [
 export const featuredCourses = [
   "MBA",
   "B.Tech",
+  "BBA",
+  "B.COM",
+  "BSC",
+  "BA",
+  "BCA",
+  "MCA",
+  "M.Tech",
   "BA LLB",
   "LLB",
   "LLM",
@@ -171,11 +183,42 @@ export const trustMetrics = [
   {
     value: "UGC",
     label: "Recognized Degree",
-    description: "Programs guided with a focus on recognized universities and valid academic outcomes."
+    description: "Programs guided with a focus on recognized universities and valid academic outcomes.",
+    icon: "/UCG.png" // check filename spelling
   },
   {
     value: "AICTE",
     label: "Approved Universities",
-    description: "Support for institutions and programs aligned with required approvals where applicable."
+    description: "Support for institutions and programs aligned with required approvals where applicable.",
+    icon: "/AICTE.png"
+  },
+  {
+    value: "BCI",
+    label: "Bar Council of India Approved",
+    description: "Guidance for law programs aligned with Bar Council of India standards.",
+    icon: "/BCI.png"
+  },
+  {
+    value: "PCI",
+    label: "Pharmacy Council of India Approved",
+    description: "Support for pharmacy programs recognized by the Pharmacy Council of India.",
+    icon: "/PCI.png"
+  },
+  {
+    value: "NAAC",
+    label: "Accredited Institutions",
+    description: "Assistance in selecting NAAC-accredited institutions ensuring quality education.",
+    icon: "/NAAC.png"
+  },
+  {
+    value: "DEB",
+    label: "Distance Education  Bureau Approved",
+    description: "Guidance for distance and online programs approved by Distance Education Bureau.",
+    icon: "/UCG.png" // ⚠️ ideally DEB ka alag logo hona chahiye
+  },
+  {
+    value: "100%",
+    label: "Trusted Guidance",
+    description: "Transparent process with personalized counseling to ensure the best academic decisions."
   }
 ];

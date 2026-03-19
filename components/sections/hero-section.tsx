@@ -46,7 +46,7 @@ export function HeroSection({ user }: { user: any }) {
           <div className="absolute -right-8 -top-8 h-40 w-40 rounded-full bg-accent/50 blur-3xl" />
           <div className="overflow-hidden rounded-[2rem] border border-white/60 bg-white p-3 shadow-soft">
             <Image
-              src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1400&q=80"
+              src="/OpenSchoolingHero.png"
               alt="Aspire education students"
               width={1200}
               height={960}

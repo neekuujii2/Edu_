@@ -74,14 +74,39 @@ export default function AboutPage() {
 
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
             {trustMetrics.map((metric) => (
-              <div key={metric.label} className="rounded-[1.75rem] border border-border bg-white p-5 shadow-card">
-                <p className="text-3xl font-semibold text-primary">{metric.value}</p>
-                <h3 className="mt-2 text-base font-semibold text-primary">{metric.label}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">{metric.description}</p>
+              <div
+                key={metric.label}
+                className="rounded-[1.75rem] border border-border bg-white p-5 shadow-card text-center hover:shadow-xl transition"
+              >
+                {/* 🔥 Logo + Value */}
+                <div className="flex items-center justify-center gap-3">
+                  {metric.icon && (
+                    <Image
+                      src={metric.icon}
+                      alt={metric.label}
+                      width={30}
+                      height={30}
+                      className="object-contain"
+                    />
+                  )}
+
+                  <p className="text-3xl font-semibold text-primary">
+                    {metric.value}
+                  </p>
+                </div>
+
+                {/* Label */}
+                <h3 className="mt-2 text-base font-semibold text-primary">
+                  {metric.label}
+                </h3>
+
+                {/* Description */}
+                <p className="mt-2 text-sm text-muted-foreground">
+                  {metric.description}
+                </p>
               </div>
             ))}
           </div>
-
           <div className="grid gap-8 lg:grid-cols-3">
             {values.map((value) => (
               <div key={value.title} className="rounded-[2rem] border border-border bg-white p-6 shadow-card">

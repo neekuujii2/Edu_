@@ -7,7 +7,7 @@ import { OpenSchoolingHighlight } from "@/components/sections/open-schooling-hig
 import { TestimonialsSection } from "@/components/sections/testimonials-section";
 import { CtaSection } from "@/components/sections/cta-section";
 import { UniversityCarousel } from "@/components/university-carousel";
-
+import { TrustSection } from "@/components/trust-section";
 export default async function HomePage() {
   const [testimonials, user] = await Promise.all([
     getApprovedTestimonials(),
@@ -25,6 +25,7 @@ export default async function HomePage() {
           <UniversityCarousel items={partnerUniversities} />
         </div>
       </section>
+      {/*<TrustSection />*/}
       <StatsGrid />
       <CourseHighlights courses={featuredCourses} user={user} />
       <OpenSchoolingHighlight user={user} />

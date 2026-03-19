@@ -72,15 +72,59 @@ export default async function OpenSchoolingPage() {
                 you need a second chance, a gap-year-friendly option, or a smoother route to continue
                 higher studies and career planning.
               </p>
-              <div className="mt-6 flex flex-wrap gap-3">
-                {["NIOS Admission", "BOSSE Admission", "Recognized Boards", "Student Documentation Help"].map((item) => (
-                  <span
-                    key={item}
-                    className="rounded-full border border-border bg-background px-4 py-2 text-sm font-medium text-primary"
-                  >
-                    {item}
-                  </span>
-                ))}
+              {/* Logos Strip (Top Trust Section) */}
+              <div className="mt-6 flex items-center gap-8">
+                <Image
+                  src="/NIOS.png"
+                  alt="NIOS Logo"
+                  width={80}
+                  height={50}
+                  className="object-contain hover:grayscale-0 hover:scale-105 transition duration-300"
+                />
+                <Image
+                  src="/Bosse.png"
+                  alt="BOSSE Logo"
+                  width={80}
+                  height={50}
+                  className="object-contain  hover:grayscale-0 hover:scale-105 transition duration-300"
+                />
+              </div>
+
+              {/* Chips with Logos + Tags */}
+              <div className="mt-6 flex flex-wrap items-center gap-6">
+                
+                {/* NIOS */}
+                <div className="flex items-center gap-3 rounded-full border border-border bg-background px-4 py-2 shadow-sm hover:shadow-md transition">
+                  <Image
+                    src="/NIOS.png"
+                    alt="NIOS Logo"
+                    width={28}
+                    height={28}
+                    className="object-contain"
+                  />
+                  <span className="text-sm font-medium text-primary">NIOS Admission</span>
+                </div>
+
+                {/* BOSSE */}
+                <div className="flex items-center gap-3 rounded-full border border-border bg-background px-4 py-2 shadow-sm hover:shadow-md transition">
+                  <Image
+                    src="/Bosse.png"
+                    alt="BOSSE Logo"
+                    width={28}
+                    height={28}
+                    className="object-contain"
+                  />
+                  <span className="text-sm font-medium text-primary">BOSSE Admission</span>
+                </div>
+
+                {/* Other Tags */}
+                <span className="rounded-full border border-border bg-background px-4 py-2 text-sm font-medium text-primary">
+                  Recognized Boards
+                </span>
+
+                <span className="rounded-full border border-border bg-background px-4 py-2 text-sm font-medium text-primary">
+                  Student Documentation Help
+                </span>
               </div>
               <div className="mt-8 grid gap-4 sm:grid-cols-2">
                 {[
@@ -100,7 +144,7 @@ export default async function OpenSchoolingPage() {
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-1">
               <div className="overflow-hidden rounded-[2rem] border border-border bg-white shadow-soft">
                 <Image
-                  src="/OpenSchoolingHero.png"
+                  src="/NIOS_2.png"
                   alt="Open schooling guidance session"
                   width={1200}
                   height={900}
@@ -118,7 +162,7 @@ export default async function OpenSchoolingPage() {
               </div>
               <div className="overflow-hidden rounded-[2rem] border border-border bg-white shadow-soft">
                 <Image
-                  src="/Choose your subject.png"
+                  src="/BOSSE_2.png"
                   alt="Subject selection assistance"
                   width={1200}
                   height={900}
