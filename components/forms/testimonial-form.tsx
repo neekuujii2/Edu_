@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { useFormState, useFormStatus } from "react-dom";
 import { submitTestimonialAction } from "@/lib/actions";
 import { Card } from "@/components/ui/card";
@@ -22,8 +23,21 @@ function SubmitButton() {
 
 export function TestimonialForm({ user }: { user: any }) {
   const [state, formAction] = useFormState(submitTestimonialAction, initialState);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  if (!user) {
+  useEffect(() => {
+    // Check localStorage for token
+    const token = localStorage.getItem("auth_token");
+    setIsLoggedIn(!!token || !!user);
+    setLoading(false);
+  }, [user]);
+
+  if (loading) {
+    return null;
+  }
+
+  if (!isLoggedIn) {
     return (
       <Card className="p-8">
         <h3 className="text-2xl font-semibold text-primary">Share your experience</h3>

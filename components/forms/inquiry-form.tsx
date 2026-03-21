@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { useFormState, useFormStatus } from "react-dom";
 import { submitInquiryAction } from "@/lib/actions";
 import { Card } from "@/components/ui/card";
@@ -30,8 +31,21 @@ export function InquiryForm({
   defaultCourse?: string;
 }) {
   const [state, formAction] = useFormState(submitInquiryAction, initialState);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  if (!user) {
+  useEffect(() => {
+    // Check localStorage for token
+    const token = localStorage.getItem("auth_token");
+    setIsLoggedIn(!!token || !!user);
+    setLoading(false);
+  }, [user]);
+
+  if (loading) {
+    return null;
+  }
+
+  if (!isLoggedIn) {
     return (
       <Card className="p-8">
         <h2 className="text-2xl font-semibold text-primary">Sign in required</h2>
