@@ -1,14 +1,19 @@
 export const siteConfig = {
   name: process.env.NEXT_PUBLIC_SITE_NAME ?? "Aspire Education Consultancy",
   description:
-    "Delivering expert academic consultancy for UG, PG, distance learning, and open schooling programs with trusted guidance and verified institutions.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+    "Empowering careers with expert academic advocacy. Guide your path to UG, PG, Distance Learning, MBA, and NIOS Open Schooling with Aspire Education Consultancy – your trusted partner for verified admissions in India.",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.aspireeducationconsultancy.com",
   keywords: [
-    "Education consultancy",
-    "Distance MBA admission",
-    "B.Tech admission",
-    "Open schooling NIOS",
-    "UG PG admission consultancy"
+    "Education consultancy India",
+    "Distance MBA admissions 2026",
+    "B.Tech admission guidance",
+    "NIOS Open Schooling support",
+    "UG PG admission consultancy Delhi",
+    "Best education consultants for MBA",
+    "Online degree admission help",
+    "Aspire Education Consultancy",
+    "Distance education experts",
+    "Career counseling India"
   ]
 };
 

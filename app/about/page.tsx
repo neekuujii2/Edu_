@@ -5,8 +5,8 @@ import { PageHero } from "@/components/page-hero";
 import { trustMetrics } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "About Us",
-  description: "Learn about Aspire Education Consultancy, our mission, counseling experience, and student-first approach."
+  title: "About Us | Top Education Consultants in New Delhi",
+  description: "Learn about Aspire Education Consultancy, our mission, and our 15+ years of experience in providing trusted admission guidance for UG, PG, MBA, and Open Schooling in India."
 };
 
 const values = [

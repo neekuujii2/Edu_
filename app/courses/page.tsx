@@ -5,8 +5,8 @@ import { courseStreams } from "@/lib/site";
 import { getCurrentUser } from "@/lib/data";
 
 export const metadata: Metadata = {
-  title: "Courses",
-  description: "Explore UG, PG, law, pharmacy, engineering, management, and education courses with Aspire Education Consultancy."
+  title: "Undergraduate & Postgraduate Courses | Admission Guide 2026",
+  description: "Explore a wide range of courses including MBA, B.Tech, MCA, LLB, D Pharma, and B.Ed. Get expert admission guidance for regular and distance learning programs at Aspire Education Consultancy."
 };
 
 export default async function CoursesPage() {

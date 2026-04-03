@@ -13,8 +13,8 @@ import { ApplyNowButton } from "@/components/apply-now-button";
 import { getCurrentUser } from "@/lib/data";
 
 export const metadata: Metadata = {
-  title: "Open Schooling",
-  description: "Get expert support for NIOS and BOSSE 10th and 12th open schooling admissions."
+  title: "NIOS & BOSSE Open Schooling Admissions | 10th & 12th Help",
+  description: "Complete your 10th or 12th through NIOS or BOSSE with expert guidance. We provide full support for subject selection, TMA submission, and exam preparation at Aspire Education Consultancy."
 };
 
 const admissionTracks = [

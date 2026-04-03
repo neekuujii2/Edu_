@@ -1,5 +1,5 @@
 import { getApprovedTestimonials, getCurrentUser } from "@/lib/data";
-import { featuredCourses, partnerUniversities } from "@/lib/site";
+import { featuredCourses, partnerUniversities, siteConfig } from "@/lib/site";
 import { HeroSection } from "@/components/sections/hero-section";
 import { StatsGrid } from "@/components/sections/stats-grid";
 import { CourseHighlights } from "@/components/sections/course-highlights";
@@ -8,6 +8,13 @@ import { TestimonialsSection } from "@/components/sections/testimonials-section"
 import { CtaSection } from "@/components/sections/cta-section";
 import { UniversityCarousel } from "@/components/university-carousel";
 import { TrustSection } from "@/components/trust-section";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: siteConfig.name + " | Best Education Consultants in India",
+  description: "Get trusted admission guidance for MBA, B.Tech, MCA, LLB, and NIOS Open Schooling. 15+ years of experience helping students secure their future. Join Aspire Education Consultancy today.",
+};
+
 export default async function HomePage() {
   const [testimonials, user] = await Promise.all([
     getApprovedTestimonials(),

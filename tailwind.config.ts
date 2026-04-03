@@ -54,6 +54,10 @@ const config: Config = {
       backgroundImage: {
         "hero-glow":
           "radial-gradient(circle at top left, rgba(124, 199, 255, 0.35), transparent 40%), radial-gradient(circle at top right, rgba(22, 59, 115, 0.25), transparent 30%), linear-gradient(135deg, #f7fbff 0%, #eef4fb 40%, #f5f7fb 100%)"
+      },
+      fontFamily: {
+        sans: ["var(--font-inter)", "ui-sans-serif", "system-ui"],
+        display: ["var(--font-space)", "ui-sans-serif", "system-ui"]
       }
     }
   },

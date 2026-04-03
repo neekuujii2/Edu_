@@ -4,9 +4,8 @@ import { InquiryForm } from "@/components/forms/inquiry-form";
 import { getCurrentUser } from "@/lib/data";
 
 export const metadata: Metadata = {
-  title: "Contact",
-  description:
-    "Contact Aspire Education Consultancy for admissions, course guidance, and open schooling support.",
+  title: "Contact Us | Education Consultant in Uttam Nagar, Delhi",
+  description: "Get in touch with Aspire Education Consultancy for expert admission guidance. Visit our office in Mohan Garden, Uttam Nagar, or call us at 9711104179 for UG, PG, and NIOS admissions."
 };
 
 export default async function ContactPage({
