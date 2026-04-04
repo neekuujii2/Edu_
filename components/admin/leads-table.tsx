@@ -26,6 +26,8 @@ export function LeadsTable({ leads }: { leads: any[] }) {
               <th className="px-6 py-4 font-medium">Name</th>
               <th className="px-6 py-4 font-medium">Phone</th>
               <th className="px-6 py-4 font-medium">Course</th>
+              <th className="px-6 py-4 font-medium">Email</th>
+              <th className="px-6 py-4 font-medium">Location</th>
               <th className="px-6 py-4 font-medium">Date</th>
             </tr>
           </thead>
@@ -35,6 +37,8 @@ export function LeadsTable({ leads }: { leads: any[] }) {
                 <td className="px-6 py-4 font-medium text-foreground">{lead.name}</td>
                 <td className="px-6 py-4 text-muted-foreground">{lead.phone}</td>
                 <td className="px-6 py-4 text-muted-foreground">{lead.course}</td>
+                <td className="px-6 py-4 text-muted-foreground">{lead.email || "N/A"}</td>
+                <td className="px-6 py-4 text-muted-foreground">{lead.location || "N/A"}</td>
                 <td className="px-6 py-4 text-muted-foreground">
                   {format(new Date(lead.created_at), "dd MMM yyyy")}
                 </td>

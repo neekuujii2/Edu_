@@ -36,6 +36,9 @@ create table if not exists public.leads (
 -- Ensure columns
 alter table public.leads add column if not exists user_id uuid references auth.users(id) on delete set null;
 alter table public.leads add column if not exists course text;
+alter table public.leads add column if not exists email text;
+alter table public.leads add column if not exists location text;
+alter table public.leads add column if not exists course_interest text;
 
 -- Fix NULL data
 update public.leads

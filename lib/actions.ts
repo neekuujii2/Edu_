@@ -47,9 +47,10 @@ export async function submitInquiryAction(
     const parsed = inquirySchema.safeParse({
       name: formData.get("name"),
       phone: formData.get("phone"),
-      course: formData.get("course"),
       email: formData.get("email"),
-      location: formData.get("location")
+      location: formData.get("location"),
+      course: formData.get("course"),
+      date_time: formData.get("date_time") || new Date().toLocaleString()
     });
 
     if (!parsed.success) {
@@ -63,11 +64,11 @@ export async function submitInquiryAction(
     const fullLead: any = {
       name: parsed.data.name,
       phone: parsed.data.phone,
-      course: parsed.data.course,
       email: email,
-      location: parsed.data.location || "",
-      course_interest: parsed.data.course,
-      message: null
+      location: parsed.data.location,
+      course_interest: parsed.data.course || "",
+      course: parsed.data.course || "",
+      created_at: new Date().toISOString()
     };
     if (user?.id) fullLead.user_id = user.id;
 
@@ -79,10 +80,10 @@ export async function submitInquiryAction(
       const basicLead: any = {
         name: parsed.data.name,
         phone: parsed.data.phone,
-        course: parsed.data.course
+        email: email,
+        course: parsed.data.course || ""
       };
       
-      // Try adding user_id separately if possible
       if (user?.id) basicLead.user_id = user.id;
 
       let retry = await supabase.from("leads").insert([basicLead]);
@@ -106,13 +107,14 @@ export async function submitInquiryAction(
 
     // Still append to sheet even if some DB columns were missing
     try {
-      await appendToSheet("Leads!A:G", [
+      // Sequence: Name, Phone, Course, Email, Location, Date & Time
+      await appendToSheet("Leads!A:F", [
         parsed.data.name,
         parsed.data.phone,
         parsed.data.course,
         email,
-        parsed.data.location || "",
-        new Date().toISOString()
+        parsed.data.location,
+        parsed.data.date_time || new Date().toLocaleString()
       ]);
     } catch (sheetError: any) {
       console.error("Google Sheets Error (Leads):", sheetError.message);

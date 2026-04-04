@@ -4,8 +4,9 @@ export const inquirySchema = z.object({
   name: z.string().min(2, "Name is required"),
   phone: z.string().min(10, "Valid phone is required"),
   course: z.string().min(2, "Course is required"),
-  email: z.string().email("Invalid email").optional().or(z.literal("")),
-  location: z.string().min(2, "Location is required").optional().or(z.literal(""))
+  email: z.string().email("Invalid email"),
+  location: z.string().min(2, "Location is required"),
+  date_time: z.string().optional()
 });
 
 export const testimonialSchema = z.object({

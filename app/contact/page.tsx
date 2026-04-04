@@ -56,7 +56,7 @@ export default async function ContactPage({
             <div className="overflow-hidden rounded-3xl border border-border bg-white shadow-card">
               <iframe
                 title="Aspire Education Consultancy Location"
-                src="https://www.google.com/maps?q=Mohan%20Garden%2C%20Uttam%20Nagar&z=14&output=embed"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3502.126929191331!2d77.03708807393866!3d28.625957684382083!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d0509ed8e8181%3A0x27be3b146bd115e1!2sAspire%20Education%20Consultancy%20%26%20Career%20Solution!5e0!3m2!1sen!2sin!4v1775325232637!5m2!1sen!2sin"
                 width="100%"
                 height="340"
                 loading="lazy"

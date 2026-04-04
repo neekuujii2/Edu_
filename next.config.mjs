@@ -25,7 +25,7 @@ const nextConfig = {
           },
           {
             key: 'Content-Security-Policy',
-            value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://va.vercel-scripts.com; style-src 'self' 'unsafe-inline'; img-src 'self' blob: data: https://images.unsplash.com; font-src 'self' data:; connect-src 'self' https://*.supabase.co; frame-src 'self'; upgrade-insecure-requests;"
+            value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://va.vercel-scripts.com; style-src 'self' 'unsafe-inline'; img-src 'self' blob: data: https://images.unsplash.com https://*.google.com https://*.gstatic.com; font-src 'self' data:; connect-src 'self' https://*.supabase.co; frame-src 'self' https://*.google.com; upgrade-insecure-requests;"
           }
         ]
       }

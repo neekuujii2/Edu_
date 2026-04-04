@@ -56,20 +56,21 @@ export function InquiryForm({
           />
         </div>
 
-        {/* Phone */}
+        {/* Phone number */}
         <div className="space-y-2">
-          <Label htmlFor="phone">Phone</Label>
+          <Label htmlFor="phone">Phone Number</Label>
           <Input
             id="phone"
             name="phone"
-            placeholder="Enter your phone number"
+            type="tel"
+            placeholder="Enter your 10-digit number"
             required
           />
         </div>
 
-        {/* Course */}
+        {/* Course Interest */}
         <div className="space-y-2">
-          <Label htmlFor="course">Course</Label>
+          <Label htmlFor="course">Course Interest</Label>
           <Input
             id="course"
             name="course"
@@ -78,6 +79,33 @@ export function InquiryForm({
             required
           />
         </div>
+
+        {/* Email */}
+        <div className="space-y-2">
+          <Label htmlFor="email">Email</Label>
+          <Input
+            id="email"
+            name="email"
+            type="email"
+            placeholder="example@gmail.com"
+            defaultValue={user?.email || ""}
+            required
+          />
+        </div>
+
+        {/* Location */}
+        <div className="space-y-2">
+          <Label htmlFor="location">Location</Label>
+          <Input
+            id="location"
+            name="location"
+            placeholder="Enter your current city"
+            required
+          />
+        </div>
+
+        {/* Date & Time (Hidden/Auto-generated) */}
+        <input type="hidden" name="date_time" value={new Date().toLocaleString()} />
 
         {/* Response Message */}
         {state.message && (
