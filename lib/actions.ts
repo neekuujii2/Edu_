@@ -40,136 +40,171 @@ export async function submitInquiryAction(
   _prevState: { success: boolean; message: string },
   formData: FormData
 ) {
-  const user = await requireUser();
-  const parsed = inquirySchema.safeParse({
-    name: formData.get("name"),
-    phone: formData.get("phone"),
-    course: formData.get("course")
-  });
+  try {
+    const supabaseAuth = createServerSupabaseClient();
+    const { data: { user } } = await supabaseAuth.auth.getUser();
 
-  if (!parsed.success) {
-    return { success: false, message: parsed.error.issues[0]?.message ?? "Invalid inquiry." };
-  }
+    const parsed = inquirySchema.safeParse({
+      name: formData.get("name"),
+      phone: formData.get("phone"),
+      course: formData.get("course"),
+      email: formData.get("email"),
+      location: formData.get("location")
+    });
 
-  const supabase = createServiceRoleClient();
-  let { error } = await supabase.from("leads").insert([
-    {
+    if (!parsed.success) {
+      return { success: false, message: parsed.error.issues[0]?.message ?? "Invalid inquiry." };
+    }
+
+    const supabase = createServiceRoleClient();
+    const email = parsed.data.email || user?.email || "";
+    
+    // Attempt 1: Full data
+    const fullLead: any = {
       name: parsed.data.name,
-      email: user.email ?? "",
       phone: parsed.data.phone,
       course: parsed.data.course,
+      email: email,
+      location: parsed.data.location || "",
       course_interest: parsed.data.course,
       message: null
-    }
-  ]);
+    };
+    if (user?.id) fullLead.user_id = user.id;
 
-  if (
-    error &&
-    (isMissingColumnError(error.message, "email", "leads") ||
-      isMissingColumnError(error.message, "course_interest", "leads") ||
-      isMissingColumnError(error.message, "message", "leads"))
-  ) {
-    const fallbackResult = await supabase.from("leads").insert([
-      {
-        ...parsed.data,
-        user_id: user.id
+    let { error } = await supabase.from("leads").insert([fullLead]);
+
+    // Attempt 2: Strip new/extra columns if Attempt 1 fails
+    if (error) {
+      console.error("DEBUG: Inquiry Attempt 1 failed:", error.message);
+      const basicLead: any = {
+        name: parsed.data.name,
+        phone: parsed.data.phone,
+        course: parsed.data.course
+      };
+      
+      // Try adding user_id separately if possible
+      if (user?.id) basicLead.user_id = user.id;
+
+      let retry = await supabase.from("leads").insert([basicLead]);
+      
+      // Attempt 3: absolute minimal
+      if (retry.error) {
+        console.error("DEBUG: Inquiry Attempt 2 failed:", retry.error.message);
+        const minimalLead = {
+          name: parsed.data.name,
+          phone: parsed.data.phone
+        };
+        retry = await supabase.from("leads").insert([minimalLead]);
       }
-    ]);
-
-    error = fallbackResult.error;
-  }
-
-  if (error) {
-    if (isMissingColumnError(error.message, "course", "leads")) {
-      return {
-        success: false,
-        message: "Your Supabase leads table is missing the course column. Run the latest SQL from supabase/schema.sql, then try again."
-      };
+      
+      error = retry.error;
     }
 
-    if (isMissingColumnError(error.message, "user_id", "leads")) {
-      return {
-        success: false,
-        message: "Your Supabase leads table does not support the old user_id field anymore. Restart the server and try again."
-      };
+    if (error) {
+      return { success: false, message: `Database error: ${error.message}` };
     }
 
-    return { success: false, message: error.message };
+    // Still append to sheet even if some DB columns were missing
+    try {
+      await appendToSheet("Leads!A:G", [
+        parsed.data.name,
+        parsed.data.phone,
+        parsed.data.course,
+        email,
+        parsed.data.location || "",
+        new Date().toISOString()
+      ]);
+    } catch (sheetError: any) {
+      console.error("Google Sheets Error (Leads):", sheetError.message);
+    }
+
+    revalidatePath("/");
+    revalidatePath("/admin");
+    revalidatePath("/contact");
+
+    return { success: true, message: `Thank you, ${parsed.data.name}! Your inquiry has been submitted. Our team will contact you soon.` };
+  } catch (err: any) {
+    return { success: false, message: err.message || "An unexpected error occurred." };
   }
-
-  await appendToSheet("Leads!A:E", [
-    parsed.data.name,
-    parsed.data.phone,
-    parsed.data.course,
-    user.email ?? "",
-    new Date().toISOString()
-  ]);
-
-  revalidatePath("/");
-  revalidatePath("/admin");
-  revalidatePath("/contact");
-
-  return { success: true, message: "Inquiry submitted successfully." };
 }
 
 export async function submitTestimonialAction(
   _prevState: { success: boolean; message: string },
   formData: FormData
 ) {
-  const user = await requireUser();
-  const parsed = testimonialSchema.safeParse({
-    name: formData.get("name"),
-    course: formData.get("course"),
-    rating: formData.get("rating"),
-    message: formData.get("message")
-  });
+  try {
+    const supabaseAuth = createServerSupabaseClient();
+    const { data: { user } } = await supabaseAuth.auth.getUser();
 
-  if (!parsed.success) {
-    return { success: false, message: parsed.error.issues[0]?.message ?? "Invalid testimonial." };
-  }
+    const parsed = testimonialSchema.safeParse({
+      name: formData.get("name"),
+      course: formData.get("course"),
+      rating: formData.get("rating"),
+      message: formData.get("message")
+    });
 
-  const supabase = createServiceRoleClient();
-  let { error } = await supabase.from("testimonials").insert([
-    {
+    if (!parsed.success) {
+      return { success: false, message: parsed.error.issues[0]?.message ?? "Invalid testimonial." };
+    }
+
+    const supabase = createServiceRoleClient();
+    
+    // Attempt 1: Full data
+    const fullTestimonial: any = {
       ...parsed.data,
       status: "pending"
-    }
-  ]);
+    };
+    if (user?.id) fullTestimonial.user_id = user.id;
 
-  if (
-    error &&
-    (isMissingColumnError(error.message, "course", "testimonials") ||
-      isMissingColumnError(error.message, "rating", "testimonials") ||
-      isMissingColumnError(error.message, "status", "testimonials"))
-  ) {
-    const fallbackResult = await supabase.from("testimonials").insert([
-      {
+    let { error } = await supabase.from("testimonials").insert([fullTestimonial]);
+
+    // Attempt 2: Fallback for missing status/rating/course/user_id
+    if (error) {
+      console.error("DEBUG: Testimonial Attempt 1 failed:", error.message);
+      const basicTestimonial: any = {
         name: parsed.data.name,
         message: parsed.data.message,
-        approved: false,
-        user_id: user.id
+        approved: false
+      };
+      
+      let retry = await supabase.from("testimonials").insert([basicTestimonial]);
+      
+      // Attempt 3: Minimal
+      if (retry.error) {
+        console.error("DEBUG: Testimonial Attempt 2 failed:", retry.error.message);
+        retry = await supabase.from("testimonials").insert([{
+          name: parsed.data.name,
+          message: parsed.data.message
+        }]);
       }
-    ]);
+      
+      error = retry.error;
+    }
 
-    error = fallbackResult.error;
+    if (error) {
+      return { success: false, message: `Database error: ${error.message}` };
+    }
+
+    try {
+      await appendToSheet("Testimonials!A:F", [
+        parsed.data.name,
+        parsed.data.course,
+        String(parsed.data.rating),
+        parsed.data.message,
+        "pending",
+        new Date().toISOString()
+      ]);
+    } catch (sheetError: any) {
+      console.error("Google Sheets Error (Testimonials):", sheetError.message);
+    }
+
+    revalidatePath("/");
+    revalidatePath("/admin");
+
+    return { success: true, message: `Thank you, ${parsed.data.name}! Your testimonial has been submitted and is waiting for approval.` };
+  } catch (err: any) {
+    return { success: false, message: err.message || "An unexpected error occurred." };
   }
-
-  if (error) {
-    return { success: false, message: error.message };
-  }
-
-  await appendToSheet("Testimonials!A:F", [
-    parsed.data.name,
-    parsed.data.course,
-    String(parsed.data.rating),
-    parsed.data.message,
-    "pending",
-    new Date().toISOString()
-  ]);
-
-  revalidatePath("/admin");
-
-  return { success: true, message: "Testimonial received and pending approval." };
 }
 
 export async function approveTestimonialAction(formData: FormData) {

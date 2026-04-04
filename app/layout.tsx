@@ -4,6 +4,7 @@ import "@/app/globals.css";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { WhatsAppFloat } from "@/components/whatsapp-float";
+import { PopupForm } from "@/components/forms/popup-form";
 import { Inter, Space_Grotesk } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
 
@@ -151,6 +152,7 @@ export default function RootLayout({
         <main>{children}</main>
         <Footer />
         <WhatsAppFloat />
+        <PopupForm />
         <Toaster />
       </body>
     </html>

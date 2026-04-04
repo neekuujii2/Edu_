@@ -11,7 +11,7 @@ export function ApplyNowButton({
   small?: boolean;
 }) {
   const target = `/contact?course=${encodeURIComponent(course)}`;
-  const href = user ? target : `/auth?redirect=${encodeURIComponent(target)}`;
+  const href = `/contact?course=${encodeURIComponent(course)}`;
 
   return (
     <Button asChild size={small ? "sm" : "lg"}>
