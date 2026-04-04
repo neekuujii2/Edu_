@@ -238,19 +238,68 @@ export async function approveTestimonialAction(formData: FormData) {
 
   const approvedState = data.status ?? (data.approved ? "approved" : "pending");
 
-  await updateTestimonialSheetStatus({
-    name: data.name,
-    course: data.course ?? "",
-    rating: data.rating ?? 5,
-    review: data.message,
-    status: approvedState,
-    date: new Date().toISOString()
-  });
+  try {
+    await updateTestimonialSheetStatus({
+      name: data.name,
+      course: data.course ?? "",
+      rating: data.rating ?? 5,
+      review: data.message,
+      status: approvedState,
+      date: new Date().toISOString()
+    });
+  } catch (sheetError) {
+    console.error("Google Sheets Error (Approve):", (sheetError as Error).message);
+  }
 
   revalidatePath("/");
   revalidatePath("/admin");
+}
 
-  
+export async function unapproveTestimonialAction(formData: FormData) {
+  await requireAdmin();
+  const id = String(formData.get("id") ?? "");
+  const supabase = createServiceRoleClient();
+
+  let { error, data } = await supabase
+    .from("testimonials")
+    .update({ status: "pending" })
+    .eq("id", id)
+    .select("*")
+    .single();
+
+  if (error && isMissingColumnError(error.message, "status", "testimonials")) {
+    const fallbackResult = await supabase
+      .from("testimonials")
+      .update({ approved: false })
+      .eq("id", id)
+      .select("*")
+      .single();
+
+    error = fallbackResult.error;
+    data = fallbackResult.data;
+  }
+
+  if (error) {
+    console.error(error.message);
+    return;
+  }
+
+  // Also update Google Sheet status
+  try {
+    await updateTestimonialSheetStatus({
+      name: data.name,
+      course: data.course ?? "",
+      rating: data.rating ?? 5,
+      review: data.message,
+      status: "pending",
+      date: new Date().toISOString()
+    });
+  } catch (sheetError) {
+    console.error("Google Sheets Error (Unapprove):", (sheetError as Error).message);
+  }
+
+  revalidatePath("/");
+  revalidatePath("/admin");
 }
 
 export async function signOutAction() {

@@ -14,13 +14,13 @@ function normalizeTestimonial(testimonial: any) {
 
 export async function getApprovedTestimonials() {
   const supabase = createServiceRoleClient();
-  const { data, error } = await supabase.from("testimonials").select("*").order("created_at", { ascending: false }).limit(50);
+  const { data, error } = await supabase.from("testimonials").select("*").order("created_at", { ascending: false }).limit(24);
 
   if (error) {
     return [];
   }
 
-  return (data ?? []).map(normalizeTestimonial).filter((item) => item.approved).slice(0, 6);
+  return (data ?? []).map(normalizeTestimonial).filter((item) => item.approved);
 }
 
 export async function getCurrentUser() {

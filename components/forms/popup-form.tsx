@@ -1,5 +1,5 @@
 "use client";
-
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useFormState, useFormStatus } from "react-dom";
 import { submitInquiryAction } from "@/lib/actions";
@@ -15,9 +15,15 @@ function SubmitButton() {
     <Button
       type="submit"
       disabled={pending}
-      className="w-full mt-6 h-14 rounded-2xl text-base font-bold shadow-soft transition-transform hover:scale-[1.02] active:scale-[0.98]"
+      className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 h-14 rounded-xl text-base font-bold shadow-lg shadow-blue-500/20 transition-all hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2"
     >
-      {pending ? "Submitting..." : "Get Started Now"}
+      {pending ? (
+        "Submitting..."
+      ) : (
+        <>
+          Get Free Guidance <Sparkles className="h-5 w-5 animate-pulse" />
+        </>
+      )}
     </Button>
   );
 }
@@ -69,49 +75,81 @@ export function PopupForm() {
           <X size={22} />
         </button>
 
-        <div className="text-center">
-          <div className="mx-auto w-12 h-12 bg-primary/5 rounded-2xl flex items-center justify-center mb-4 text-primary">
-            <Sparkles className="w-6 h-6 stroke-[2.5px]" />
+        <div className="flex flex-col items-center text-center">
+          {/* LOGO & BRAND */}
+          <div className="mb-6 flex flex-col items-center gap-2">
+            <div className="rounded-2xl bg-primary/5 p-3 ring-1 ring-primary/10">
+              <Image
+                src="/logo.png"
+                alt="Aspire Education Logo"
+                width={60}
+                height={60}
+                className="rounded-lg object-contain"
+              />
+            </div>
+            <div>
+              <h3 className="text-sm font-bold uppercase tracking-[0.2em] text-primary">
+                Aspire Education
+              </h3>
+              <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-widest">
+                Consultancy & Career Solution
+              </p>
+            </div>
           </div>
-          <h2 className="text-2xl font-bold text-primary">Free Expert Guidance</h2>
-          <p className="mt-2 text-sm text-muted-foreground">
-            Trusted by 5000+ students for premium admission support.
+
+          {/* MAIN CALL TO ACTION */}
+          <h2 className="text-2xl font-extrabold tracking-tight text-slate-900 md:text-3xl">
+            Free Expert Guidance
+          </h2>
+          <p className="mt-2 text-sm leading-relaxed text-slate-500 max-w-[280px]">
+            Trusted by <span className="font-bold text-blue-600">5000+ students</span> for premium admission support.
           </p>
         </div>
 
-        <form action={formAction} className="mt-8 space-y-4">
-          <div className="space-y-1.5">
-            <Label htmlFor="popup-name" className="text-sm font-semibold ml-1 text-primary/80">Full Name</Label>
-            <Input id="popup-name" name="name" className="h-12 rounded-2xl border-border/50 focus:border-primary/30" placeholder="John Doe" required />
+        <form action={formAction} className="mt-8 space-y-5">
+          <div className="space-y-2">
+            <Label htmlFor="popup-name" className="text-xs font-bold uppercase tracking-wider text-slate-500 ml-1">Full Name</Label>
+            <Input id="popup-name" name="name" className="h-12 rounded-xl border-slate-200 bg-slate-50/50 transition-all focus:bg-white focus:ring-2 focus:ring-blue-500/20" placeholder="e.g. Rahul Sharma" required />
           </div>
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-            <div className="space-y-1.5">
-              <Label htmlFor="popup-course" className="text-sm font-semibold ml-1 text-primary/80">Course</Label>
-              <Input id="popup-course" name="course" className="h-12 rounded-2xl border-border/50 focus:border-primary/30" placeholder="MBA / NIOS" required />
+            <div className="space-y-2">
+              <Label htmlFor="popup-course" className="text-xs font-bold uppercase tracking-wider text-slate-500 ml-1">Course Policy</Label>
+              <Input id="popup-course" name="course" className="h-12 rounded-xl border-slate-200 bg-slate-50/50 transition-all focus:bg-white focus:ring-2 focus:ring-blue-500/20" placeholder="MBA / NIOS / B.Ed" required />
             </div>
 
-            <div className="space-y-1.5">
-              <Label htmlFor="popup-phone" className="text-sm font-semibold ml-1 text-primary/80">Phone</Label>
-              <Input id="popup-phone" name="phone" type="tel" className="h-12 rounded-2xl border-border/50 focus:border-primary/30" placeholder="10-digit" required />
+            <div className="space-y-2">
+              <Label htmlFor="popup-phone" className="text-xs font-bold uppercase tracking-wider text-slate-500 ml-1">Phone Number</Label>
+              <Input id="popup-phone" name="phone" type="tel" className="h-12 rounded-xl border-slate-200 bg-slate-50/50 transition-all focus:bg-white focus:ring-2 focus:ring-blue-500/20" placeholder="10-digit number" required />
             </div>
           </div>
 
-          <div className="space-y-1.5">
-            <Label htmlFor="popup-email" className="text-sm font-semibold ml-1 text-primary/80 text-foreground">Email (Optional)</Label>
-            <Input id="popup-email" name="email" type="email" className="h-12 rounded-2xl border-border/50 focus:border-primary/30" placeholder="your@email.com" />
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div className="space-y-2">
+              <Label htmlFor="popup-email" className="text-xs font-bold uppercase tracking-wider text-slate-500 ml-1">Email</Label>
+              <Input id="popup-email" name="email" type="email" className="h-12 rounded-xl border-slate-200 bg-slate-50/50 transition-all focus:bg-white focus:ring-2 focus:ring-blue-500/20" placeholder="name@example.com" />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="popup-location" className="text-xs font-bold uppercase tracking-wider text-slate-500 ml-1">Your City</Label>
+              <Input id="popup-location" name="location" className="h-12 rounded-xl border-slate-200 bg-slate-50/50 transition-all focus:bg-white focus:ring-2 focus:ring-blue-500/20" placeholder="e.g. New Delhi" required />
+            </div>
           </div>
 
-          <div className="space-y-1.5">
-            <Label htmlFor="popup-location" className="text-sm font-semibold ml-1 text-primary/80 text-foreground">Location</Label>
-            <Input id="popup-location" name="location" className="h-12 rounded-2xl border-border/50 focus:border-primary/30" placeholder="Specify your city" required />
+          <div className="pt-2">
+            <SubmitButton />
           </div>
-
-          <SubmitButton />
           
-          <p className="text-[10px] text-center text-muted-foreground mt-4 leading-relaxed">
-            Your data is 100% secure. By submitting, you agree to our Terms & Privacy Policy.
-          </p>
+          <div className="flex items-center justify-center gap-4 border-t border-slate-100 pt-6">
+            <div className="flex items-center gap-1.5 opacity-60">
+              <div className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+              <span className="text-[10px] font-bold text-slate-500 uppercase tracking-tighter">Safe & Secure</span>
+            </div>
+            <div className="flex items-center gap-1.5 opacity-60">
+              <div className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+              <span className="text-[10px] font-bold text-slate-500 uppercase tracking-tighter">Expert Advisors</span>
+            </div>
+          </div>
         </form>
       </div>
     </div>
